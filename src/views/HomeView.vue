@@ -1,6 +1,6 @@
 <script setup>
-import { useRoute } from "vue-router";
-import { onMounted, ref } from "vue";
+import {useRoute} from "vue-router";
+import {onMounted, ref} from "vue";
 import api from "../assets/api";
 
 document.title = useRoute().name;
@@ -12,18 +12,18 @@ api.all().then((json) => {
 
 onMounted(() => {
   document.body
-    .querySelector("#delete-product-btn")
-    .addEventListener("click", () => {
-      const ids = Array.from(
-        document.body.querySelectorAll(".delete-checkbox:checked")
-      ).map((el) => el.parentElement.id);
+      .querySelector("#delete-product-btn")
+      .addEventListener("click", () => {
+        const ids = Array.from(
+            document.body.querySelectorAll(".delete-checkbox:checked")
+        ).map((el) => el.parentElement.id);
 
-      if (ids.length === 0) return;
+        if (ids.length === 0) return;
 
-      api.remove(...ids).then(() => {
-        window.location.href = "/";
+        api.remove(...ids).then(() => {
+          window.location.href = "/";
+        });
       });
-    });
 });
 </script>
 
@@ -41,33 +41,32 @@ onMounted(() => {
       </button>
     </a>
   </div>
-  <hr />
+  <hr/>
   <div class="row justify-content-center cards">
     <div
-      class="col-auto border rounded position-relative card"
-      v-for="item in items"
-      v-bind:key="item['id']"
-      v-bind:id="item['id']"
+        class="col-auto border rounded position-relative card"
+        v-for="item in items"
+        v-bind:key="item['id']"
+        v-bind:id="item['id']"
     >
       <input
-        type="checkbox"
-        class="delete-checkbox form-check-input position-absolute translate-middle"
-        style="top: 10%; left: 10%"
+          type="checkbox"
+          class="delete-checkbox form-check-input position-absolute translate-middle"
+          style="top: 10%; left: 10%"
       />
       <div
-        class="h-100 d-flex flex-column justify-content-center align-items-center"
+          class="h-100 d-flex flex-column justify-content-center align-items-center"
       >
         <span>{{ item["sku"] }}</span>
         <span>{{ item["name"] }}</span>
         <span>{{ item["price"] }} $</span>
-        <span v-if="item['size']">Size: {{ item["size"]["size"] }} MB</span>
-        <span v-if="item['dimension']"
-          >Dimension:
-          {{ Object.values(item["dimension"]).slice(1).join("x") }}</span
-        >
-        <span v-if="item['weight']"
-          >Weight: {{ item["weight"]["weight"] }}KG</span
-        >
+        <span v-if="item['size']">Size: {{ item["size"] }} MB</span>
+        <span v-if="item['height'] && item['width'] && item['length']">
+          Dimension: {{ [item['height'], item['width'], item['length']].join('x') }}
+        </span>
+        <span v-if="item['weight']">
+          Weight: {{ item["weight"] }}KG
+        </span>
       </div>
     </div>
   </div>
@@ -83,7 +82,7 @@ onMounted(() => {
   --items-count: 4;
 
   width: calc(
-    calc(100% - calc(1em * calc(var(--items-count) - 1))) / var(--items-count)
+      calc(100% - calc(1em * calc(var(--items-count) - 1))) / var(--items-count)
   );
 
   aspect-ratio: 4 / 3;
