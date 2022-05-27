@@ -9,3 +9,7 @@ import { RouterView } from "vue-router";
     <h4 class="text-center">Scandiweb Test assignment</h4>
   </div>
 </template>
+
+<style>
+@import "assets/style.css";
+</style>

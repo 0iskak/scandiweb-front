@@ -1,6 +1,6 @@
 <script setup>
-import {useRoute} from "vue-router";
-import {onMounted} from "vue";
+import { useRoute } from "vue-router";
+import { onMounted } from "vue";
 import api from "../assets/api";
 
 document.title = useRoute().name;
@@ -8,49 +8,49 @@ document.title = useRoute().name;
 onMounted(() => {
   const show = (id) => {
     document.body
-        .querySelector("#productType")
-        .querySelectorAll("option:not([value=''])")
-        .forEach((form) => {
-          const value = form.value;
-          const option = document.body.querySelector("#" + value);
-          const inputs = option.querySelectorAll("input");
+      .querySelector("#productType")
+      .querySelectorAll("option:not([value=''])")
+      .forEach((form) => {
+        const value = form.value;
+        const option = document.body.querySelector("#" + value);
+        const inputs = option.querySelectorAll("input");
 
-          if (value === id) {
-            option.classList.remove("d-none");
-            inputs.forEach((input) => (input.required = true));
-          } else {
-            option.classList.add("d-none");
-            inputs.forEach((input) => {
-              input.required = false;
-              input.value = "";
-            });
-          }
-        });
+        if (value === id) {
+          option.classList.remove("d-none");
+          inputs.forEach((input) => (input.required = true));
+        } else {
+          option.classList.add("d-none");
+          inputs.forEach((input) => {
+            input.required = false;
+            input.value = "";
+          });
+        }
+      });
   };
   show();
 
   document.body
-      .querySelector("#productType")
-      .addEventListener("change", (e) => {
-        show(e.target.value);
-      });
+    .querySelector("#productType")
+    .addEventListener("change", (e) => {
+      show(e.target.value);
+    });
 
   document.body
-      .querySelector("#product_form")
-      .addEventListener("submit", (e) => {
-        e.preventDefault();
+    .querySelector("#product_form")
+    .addEventListener("submit", (e) => {
+      e.preventDefault();
 
-        const form = e.target;
-        const values = {};
-        form.querySelectorAll(`#${form.id} input:required`).forEach((input) => {
-          values[input.name] = input.value;
-        });
-        values['type'] = form.querySelector('#productType').value;
-
-        api.post(values).then(() => {
-          window.location.href = "/";
-        });
+      const form = e.target;
+      const values = {};
+      form.querySelectorAll(`#${form.id} input:required`).forEach((input) => {
+        values[input.name] = input.value;
       });
+      values["type"] = form.querySelector("#productType").value;
+
+      api.post(values).then(() => {
+        window.location.href = "/";
+      });
+    });
 });
 </script>
 
@@ -68,40 +68,40 @@ onMounted(() => {
       <button class="btn btn-primary">Cancel</button>
     </a>
   </div>
-  <hr/>
+  <hr />
 
   <form class="w-50 d-flex flex-column gap-4" id="product_form">
     <div class="d-flex flex-column gap-2">
       <div class="row">
         <label class="col-3 form-label" for="sku">SKU</label>
         <input
-            class="col form-control"
-            type="text"
-            id="sku"
-            name="sku"
-            required
+          class="col form-control"
+          type="text"
+          id="sku"
+          name="sku"
+          required
         />
       </div>
       <div class="row">
         <label class="col-3 form-label" for="name">Name</label>
         <input
-            class="col form-control"
-            type="text"
-            id="name"
-            name="name"
-            required
+          class="col form-control"
+          type="text"
+          id="name"
+          name="name"
+          required
         />
       </div>
       <div class="row">
         <label class="col-3 form-label" for="price">Price ($)</label>
         <input
-            class="col form-control"
-            type="number"
-            step=".01"
-            min="0"
-            id="price"
-            name="price"
-            required
+          class="col form-control"
+          type="number"
+          step=".01"
+          min="0"
+          id="price"
+          name="price"
+          required
         />
       </div>
     </div>
@@ -120,12 +120,12 @@ onMounted(() => {
       <div class="row">
         <label class="col-auto" for="size">Size (MB)</label>
         <input
-            class="col form-control"
-            id="size"
-            name="size"
-            type="number"
-            step="100"
-            min="100"
+          class="col form-control"
+          id="size"
+          name="size"
+          type="number"
+          step="100"
+          min="100"
         />
       </div>
       <span>Please, provide size</span>
@@ -135,31 +135,31 @@ onMounted(() => {
       <div class="row">
         <label class="col-4 form-label" for="height">Height (CM)</label>
         <input
-            class="col form-control"
-            id="height"
-            name="height"
-            type="number"
-            min="0"
+          class="col form-control"
+          id="height"
+          name="height"
+          type="number"
+          min="0"
         />
       </div>
       <div class="row">
         <label class="col-4 form-label" for="width">Width (CM)</label>
         <input
-            class="col form-control"
-            id="width"
-            name="width"
-            type="number"
-            min="0"
+          class="col form-control"
+          id="width"
+          name="width"
+          type="number"
+          min="0"
         />
       </div>
       <div class="row">
         <label class="col-4 form-label" for="length">Length (CM)</label>
         <input
-            class="col form-control"
-            id="length"
-            name="length"
-            type="number"
-            min="0"
+          class="col form-control"
+          id="length"
+          name="length"
+          type="number"
+          min="0"
         />
       </div>
       <span>Please, provide dimensions</span>
@@ -169,21 +169,15 @@ onMounted(() => {
       <div class="row">
         <label class="col-auto form-label" for="weight">Weight (CM)</label>
         <input
-            class="col form-control"
-            id="weight"
-            name="weight"
-            type="number"
-            step=".1"
-            min="0"
+          class="col form-control"
+          id="weight"
+          name="weight"
+          type="number"
+          step=".1"
+          min="0"
         />
       </div>
       <span>Please, provide weight</span>
     </div>
   </form>
 </template>
-
-<style>
-#product_form .row {
-  align-items: baseline;
-}
-</style>
